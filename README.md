@@ -4,7 +4,10 @@
 See the (temporary) live demo: https://bingemasters-host.web.app/
 #### *Authentication is down at the moment*
 
+### Main Menu & Login
 ![](bingemasters-main.gif)
+
+### Gameplay & Leaderboard Posting
 ![](bingemasters-gameplay.gif)
 
 ## Description:
