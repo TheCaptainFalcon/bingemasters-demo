@@ -205,7 +205,10 @@ class HomePage extends React.Component {
     state = {
         clickedGame: false,
         clickedHowTo: false,
-        clickedLeaderboard: false
+        clickedLeaderboard: false,
+        clickedRegister: false,
+        clickedLogin: false
+
     }
 
     handleClickGame () {
@@ -213,24 +216,36 @@ class HomePage extends React.Component {
           clickedGame: true,
           clickedHowTo: false,
           clickedLeaderboard: false
-        })
-      }
+        });
+      };
 
     handleClickHowTo () {
         this.setState({
             clickedGame: false,
             clickedHowTo: true,
             clickedLeaderboard: false
-        })
-    }
+        });
+    };
 
     handleClickLeaderboard () {
         this.setState({
             clickedGame: false,
             clickedHowTo: false,
             clickedLeaderboard: true
-        })
-    }
+        });
+    };
+
+    handleClickRegister() {
+        this.setState({
+            clickedRegister: true
+        });
+    };
+
+    handleClickLogin() {
+        this.setState({
+            clickedLogin: true
+        });
+    };
 
     renderContent1() {
         switch (this.props.auth) {

@@ -23,12 +23,11 @@ const corsOptions = {
       "Origin, X-Requested-With, Content-Type, Accept"
   };
 
-const indexRouter = require('./routes/index'),
-    usersRouter = require('./routes/users'),
-    googleRouter = require('./routes/auth'),
+
+const usersRouter = require('./routes/users'),
     scoreRouter = require('./routes/score');
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
  
 const app = express();
 
@@ -56,8 +55,6 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/', googleRouter);
 app.use('/', scoreRouter);
 module.exports = app;
