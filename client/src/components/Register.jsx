@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import { connect } from 'react-redux';
 // create an auth action for this
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Form, Card, Button } from 'react-bootstrap';
+// import PropTypes from 'prop-types';
+// import styled from 'styled-components';
+// import { Form, Card, Button } from 'react-bootstrap';
 
 
 class Register extends Component {
@@ -18,10 +18,10 @@ class Register extends Component {
             errors: {},
             clickedHome: false
         }
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
         
     }
-    
+
     render() { 
         return (  
             <div>

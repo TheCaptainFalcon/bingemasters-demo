@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 import Instructions from './Instructions';
 import Leaderboard from './Leaderboard';
+import Register from './Register';
+import Login from './Login';
 import tv_static2 from '../tv_static2.jpg';
 import { connect } from 'react-redux';
 import SelectDifficulty from './SelectDifficulty';
 import silhouette from '../silhouette.jpg';
+
 
 const StartGameBackground = styled.div`
     background: url(${tv_static2}) no-repeat center center fixed;
@@ -145,43 +148,7 @@ const ButtonLine = styled.div`
     }
 `
 
-const StartGameButton = styled.button`
-    background-color: pink;
-    color: black;
-    :hover {color: white};
-    transition: color .1s;
-    position: relative;
-    bottom: 2.5rem;
-    font-family: 'Gill Sans MT', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 0.875rem;
-    padding: 0.625rem;
-    margin: 0.5rem;
-    margin-right: 1rem;
-    width: 9.5rem;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    border: solid 0.188rem black;
-`;
-
-const HowToPlayButton = styled.button`
-    background-color: pink;
-    :hover {color: white};
-    transition: color .1s;
-    color: black;
-    position: relative;
-    bottom: 2.5rem;
-    font-family: 'Gill Sans MT', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 0.875rem;
-    padding: 0.625rem;
-    margin: 0.5rem;
-    margin-right: 1rem;
-    width: 9.5rem;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    border: solid 0.188rem black;
-`;
-
-const LeaderboardButton = styled.button`
+const MenuButtons = styled.button`
     background-color: pink;
     color: black;
     position: relative;
@@ -199,16 +166,40 @@ const LeaderboardButton = styled.button`
     border: solid 0.188rem black;
 `;
 
+const AuthButtons = styled.button`
+    background-color: papayawhip;
+    color: black;
+    position: relative;
+    bottom: 2.5rem;
+    :hover {color: white};
+    transition: color .1s;
+    font-family: 'Gill Sans MT', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 0.875rem;
+    padding: 0.625rem;
+    margin: 0.5rem;
+    margin-right: 1rem;
+    width: 9.5rem;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    border: solid 0.188rem black;
+`;
 
-class HomePage extends React.Component {
+class HomePage extends Component {
+    constructor(props) {
+        super(props)
 
-    state = {
-        clickedGame: false,
-        clickedHowTo: false,
-        clickedLeaderboard: false,
-        clickedRegister: false,
-        clickedLogin: false
-
+        this.state = {
+            clickedGame: false,
+            clickedHowTo: false,
+            clickedLeaderboard: false,
+            clickedRegister: false,
+            clickedLogin: false
+        }
+        this.handleClickGame = this.handleClickGame.bind(this);
+        this.handleClickHowTo = this.handleClickHowTo.bind(this);
+        this.handleClickLeaderboard = this.handleClickLeaderboard.bind(this);
+        this.handleClickRegister = this.handleClickRegister.bind(this);
+        this.handleClickLogin = this.handleClickLogin.bind(this);
     }
 
     handleClickGame () {
@@ -296,9 +287,9 @@ class HomePage extends React.Component {
         // dev test
         console.log(this.props);
 
-        if (this.state.clickedGame === false && this.state.clickedHowTo === false && this.state.clickedLeaderboard === false) {
+        if (!this.state.clickedGame && !this.state.clickedHowTo && !this.state.clickedLeaderboard && !this.state.clickedRegister) {
 
-        return(
+        return (
             <StartGameBackground>
                 <StyledStartGame>
                     <StartGameTitle>
@@ -308,35 +299,50 @@ class HomePage extends React.Component {
                         <img className="theActorImg" src={silhouette} alt="this... is a random actor"/>
                     </ImageWrapper>
                     <ButtonLine>
-                        <StartGameButton 
+                        <MenuButtons
                             type="submit"
-                            onClick={this.handleClickGame.bind(this)}
-                            >Start Game      
-                        </StartGameButton>
-                        <HowToPlayButton
+                            onClick={this.handleClickGame}
+                        >Start Game      
+                        </MenuButtons>
+                        <MenuButtons
                             type="submit"
-                            onClick={this.handleClickHowTo.bind(this)}
-                            >How to Play   
-                        </HowToPlayButton>
-                        <LeaderboardButton
-                        type="submit"
-                        onClick={this.handleClickLeaderboard.bind(this)}
+                            onClick={this.handleClickHowTo}
+                        >How to Play   
+                        </MenuButtons>
+                        <MenuButtons
+                            type="submit"
+                            onClick={this.handleClickLeaderboard}
                         >Leaderboard
-                        </LeaderboardButton>
-                        {this.renderContent1()}   
+                        </MenuButtons>
+                    </ButtonLine>
+                    <ButtonLine>
+                        <AuthButtons
+                            type='submit'
+                            onClick={this.handleClickRegister}
+                        >Register
+                        </AuthButtons>
+                        <AuthButtons
+                            type='submit'
+                            onClick={this.handleClickLogin}
+                        >Login
+                        </AuthButtons>
                     </ButtonLine>
                 </StyledStartGame>
             </StartGameBackground>
             
-        )} else if (this.state.clickedGame === true && this.state.clickedHowTo === false && this.state.clickedLeaderboard === false) {
+        )} else if (this.state.clickedGame) {
             return <SelectDifficulty/>
-    }      else if (this.state.clickedGame === false && this.state.clickedHowTo === true && this.state.clickedLeaderboard === false) {
+        } else if (this.state.clickedHowTo) {
             return <Instructions/>
-    }      else if (this.state.clickedGame === false && this.state.clickedHowTo === false && this.state.clickedLeaderboard === true) {
-            // Change back to Leaderboard
-            return <Leaderboard/>
+        } else if (this.state.clickedLeaderboard) {
+            return <Leaderboard/>     
+        } else if (this.state.clickedRegister) {
+            return <Register/>
+        } else if (this.state.clickedLogin) {
+            return <Login/>
+        }
     }
-}}
+}
 
 function mapStateToProps ({ auth }) {
     return { auth };
